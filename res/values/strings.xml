@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- App Level Text -->
+    <string name="app_name">PanicLock</string>
+	<string name="second">Second</string>
+	<string name="seconds">Seconds</string>
+
+	<!-- PanicLockMain Activity -->
+	<string name="menu_preferences">Preferences</string>
+	<string name="menu_exit">Exit</string>
+    
+    <!-- Button Text -->
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    
+    <!-- Alarm Preferences -->
+    <string name="alarmPreferencesCategoryTitle">Alarm Settings</string>
+    
+    <string name="quickPanicAlarmMessage">Quick Panic Alarm</string>
+    <string name="quickPanicAlarmDefaultValue">Default Alarm</string>
+    
+    <string name="deadMansSwitchAlarmMessage">Dead Man\'s Switch Alarm</string>
+    <string name="deadMansSwitchAlarmDefaultValue">Default Alarm</string>
+    
+    <string name="panicLockDisturbanceAlarmMessage">PanicLock Disturbance Alarm</string>
+    <string name="panicLockDisturbanceAlarmDefaultValue">House Alarm</string>
+    
+    <!-- External Alarm Preferences -->
+	<string name="externalAlarmPreferencesCategoryTitle">External Alarm Settings</string>
+    
+    <string name="externalAlarmMessage">Send External Alarms</string>
+    <string name="externalAlarmSummary">Controls whether External alarms will occur</string>
+    <string name="externalAlarmOnMessage">External Alarm is enabled</string>
+    <string name="externalAlarmOffMessage">External Alarm is disabled</string>
+    
+	<string name="externalAlarmOnlyOnPanicLockDisturbanceMessage">Only on PanicLock Disturbance</string>
+	<string name="externalAlarmOnlyOnPanicLockDisturbanceSummary"></string>
+	<string name="externalAlarmOnlyOnPanicLockDisturbanceOffMessage"></string>
+	<string name="externalAlarmOnlyOnPanicLockDisturbanceOnMessage"></string>
+    
+    <string name="alarmOnUrlMessage">Alarm On URL</string>
+    <string name="alarmOnUrlSummary">The URL to ping when alarm starts</string>
+    <string name="alarmOnUrlDialogTitle">Type URL</string>
+    
+    <string name="alarmOffUrlMessage">Alarm Off URL</string>
+    <string name="alarmOffUrlSummary">The URL to ping when alarm stops</string>
+    <string name="alarmOffUrlDialogTitle">Type URL</string>
+    
+    <!-- Shared Preference Keys -->
+    <string name="quickPanicAlarm">quickPanicAlarm</string>
+    <string name="deadMansSwitchAlarm">deadMansSwitchAlarm</string>
+    <string name="panicLockDisturbanceAlarm">panicLockDisturbanceAlarm</string>
+    <string name="externalAlarm">externalAlarm</string>
+    <string name="externalAlarmOnlyOnPanicLockDisturbance">externalAlarmOnlyOnPanicLockDisturbance</string>
+    <string name="alarmOnUrl">alarmOnUrl</string>
+    <string name="alarmOffUrl">alarmOffUrl</string>
+    <string name="panicLock">panicLock</string>
+    
+    <!-- User Alert Messages -->
+    <string name="externalAlarmOnToast">External alarm activated!</string>
+    <string name="externalAlarmOnFailedToast">External alarm activation failed!</string>
+    
+    <string name="externalAlarmOffToast">External alarm deactivated!</string>
+    <string name="externalAlarmOffFailedToast">External alarm deactivation failed!</string>
+    
+    <string name="panicLockStarted">PanicLock is now running.</string>
+    <string name="panicLockEnded">PanicLock has now ended.</string>
+    
+    <!-- Widget Messages -->
+    <string name="panicLockWidgetName">Quick Panic!</string>
+    <string name="widgetTitle">PanicLock Widget</string>
+    <string name="widgetPreferencesName">Widget Preferences</string>
+    <string name="quickPanicAlarmTitle">Set Quick Panic Alarm</string>
+</resources>

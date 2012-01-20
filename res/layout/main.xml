@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/MainLinearLayout"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:gravity="center_horizontal"
+	android:baselineAligned="false"
+	android:background="@drawable/brushed_metal_look">
+
+	<ImageView android:id="@+id/panicButtonView"
+		android:layout_gravity="center"
+		android:src="@drawable/panic_default"
+		android:scaleType="centerCrop"
+		android:adjustViewBounds="true"
+		android:soundEffectsEnabled="true"		
+		android:visibility="visible"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" />
+
+</LinearLayout>

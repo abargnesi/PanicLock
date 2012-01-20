@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:key="@string/quickPanicAlarm"
+        android:title="@string/quickPanicAlarmTitle"
+        android:entries="@array/list_alarm"
+        android:entryValues="@array/list_alarm"
+        android:selectable="true"
+        android:enabled="true" />
+</PreferenceScreen>

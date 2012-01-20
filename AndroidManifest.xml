@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.den_4.panicLock" android:versionCode="3" android:versionName="chatham">
+
+  <application android:icon="@drawable/icon" android:label="@string/app_name">
+  
+    <!-- PanicLock - Main Application -->
+    <activity android:name="com.den_4.panicLock.PanicLockMainActivity" android:label="@string/app_name">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+
+    <activity android:name="com.den_4.panicLock.EditPreferenceActivity" android:label="@string/app_name" />
+
+    <!-- PanicLock Alarm Service -->
+    <service android:enabled="true" android:name="com.den_4.panicLock.alarm.service.PanicLockService" />
+
+    <!-- PanicLock - Widget -->
+    <activity android:name="com.den_4.panicLock.PanicWidgetAlarmPreference" android:label="@string/widgetPreferencesName" android:theme="@android:style/Theme.Dialog" />
+    
+    <receiver android:name="com.den_4.panicLock.PanicWidget" android:label="@string/panicLockWidgetName">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+      </intent-filter>
+      <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_provider" />
+    </receiver>
+    
+    <receiver android:name="com.den_4.panicLock.AlarmTriggerReceiver" android:enabled="true">
+      <intent-filter>
+        <action android:name="com.den_4.panicLock.ALARM_TRIGGER" />
+      </intent-filter>
+    </receiver>
+  </application>
+
+  <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="4" />
+
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+  <uses-permission android:name="android.permission.VIBRATE" />
+  <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+</manifest>

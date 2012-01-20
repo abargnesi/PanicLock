@@ -1,0 +1,25 @@
+VERSION 3.0
+-----------
+* Fixed Issues
+  - Fixed accidental muting of ringer volume.
+  - Reset music volume when alarm ends.  This is required since
+    the music volume is automatically adjusted to MAX volume when
+    the PanicLock alarm sounds.
+
+VERSION 2.0
+-----------
+* Improved "Quick Panic!" widget to look like some army console.
+  Also provides Quick Panic alarm configuration button and button
+  to launch the PanicLock main application.
+
+VERSION 1.0
+-----------
+* Main application activity that shows a "PANIC" button and allows
+  the following alarms:
+  - Quick Panic alarm: single click (0 - 1 second)
+  - Enable Panic Lock Mode: long press (1 - 3 seconds)
+  - Dead Man's Switch: long press (>= 3 seconds)
+  
+* "Quick Panic!" home-screen widget
+  - Press once to activate quick panic alarm.  Press again to
+    deactivate.

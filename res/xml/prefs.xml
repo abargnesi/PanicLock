@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<PreferenceCategory android:title="@string/alarmPreferencesCategoryTitle">
+		<ListPreference
+			android:key="@string/quickPanicAlarm"
+			android:title="@string/quickPanicAlarmMessage"
+			android:entries="@array/list_alarm"  
+			android:entryValues="@array/list_alarm"  
+			android:selectable="true"
+			android:enabled="true" />
+			
+		<ListPreference
+			android:key="@string/deadMansSwitchAlarm"
+			android:title="@string/deadMansSwitchAlarmMessage"
+			android:entries="@array/list_alarm"  
+			android:entryValues="@array/list_alarm"  
+			android:selectable="true"
+			android:enabled="true" />
+			
+		<ListPreference
+			android:key="@string/panicLockDisturbanceAlarm"
+			android:title="@string/panicLockDisturbanceAlarmMessage"
+			android:entries="@array/list_alarm"  
+			android:entryValues="@array/list_alarm"  
+			android:selectable="true"
+			android:enabled="true" />
+	</PreferenceCategory>
+		
+	<PreferenceCategory android:title="@string/externalAlarmPreferencesCategoryTitle">
+		<CheckBoxPreference
+		    android:key="@string/externalAlarm"
+		    android:title="@string/externalAlarmMessage"
+			android:summary="@string/externalAlarmSummary"
+			android:enabled="true"
+			android:summaryOff="@string/externalAlarmOffMessage"
+			android:summaryOn="@string/externalAlarmOnMessage"
+			android:selectable="true"
+			android:disableDependentsState="false" />
+		
+		<CheckBoxPreference
+		    android:key="@string/externalAlarmOnlyOnPanicLockDisturbance"
+		    android:title="@string/externalAlarmOnlyOnPanicLockDisturbanceMessage"
+			android:summary="@string/externalAlarmOnlyOnPanicLockDisturbanceSummary"
+			android:enabled="false"
+			android:summaryOff="@string/externalAlarmOnlyOnPanicLockDisturbanceOffMessage"
+			android:summaryOn="@string/externalAlarmOnlyOnPanicLockDisturbanceOnMessage"
+			android:selectable="true"
+			android:dependency="@string/externalAlarm"
+			android:shouldDisableView="true"
+			 />
+			
+		<EditTextPreference 
+			android:key="@string/alarmOnUrl"
+			android:title="@string/alarmOnUrlMessage"
+			android:summary="@string/alarmOnUrlSummary"
+			android:dialogTitle="@string/alarmOnUrlDialogTitle"
+			android:dependency="@string/externalAlarm"
+			android:shouldDisableView="true"
+			android:selectable="true"
+			android:enabled="true" />
+			
+		<EditTextPreference
+			android:key="@string/alarmOffUrl"
+			android:title="@string/alarmOffUrlMessage"
+			android:summary="@string/alarmOffUrlSummary"
+			android:dialogTitle="@string/alarmOffUrlDialogTitle"
+			android:dependency="@string/externalAlarm"
+			android:shouldDisableView="true"
+			android:selectable="true"
+			android:enabled="true" />
+	</PreferenceCategory>
+</PreferenceScreen>
