@@ -34,48 +34,54 @@ import com.den_4.panicLock.model.AlarmType;
 
 /**
  * {@link AsyncTask} used to make an HTTP request to a URL endpoint when an alarm is armed and disarmed.
- * 
+ *
  * @author tony (<a href="mailto:tony@den-4.com">tony@den-4.com</a>)
  */
 public class ExternalPanicRequestTask extends AsyncTask<String, Integer, Integer> {
 	private AlarmType alarmType;
 	private Context context;
-	
+
 	public ExternalPanicRequestTask(AlarmType alarmType, Context context) {
 		super();
 		this.alarmType = alarmType;
 		this.context = context;
 	}
 
+	/**
+     * {@inheritDoc}
+     */
 	@Override
 	protected Integer doInBackground(String... params) {
 		try {
 			HttpURLConnection httpConnection = getConnection(params[0]);
-			
+
 			return httpConnection.getResponseCode();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return HttpURLConnection.HTTP_BAD_REQUEST;
 	}
-	
+
 	protected boolean isResponseOk(int httpResponseCode) {
 		return httpResponseCode == HttpURLConnection.HTTP_OK;
 	}
-	
+
 	protected HttpURLConnection getConnection(String url) throws IOException {
 		URL alarmUrl = new URL(url);
-		
+
 		if(alarmUrl.getProtocol().equalsIgnoreCase("https")) {
 			return (HttpsURLConnection) alarmUrl.openConnection();
 		}
-		else {
-			return (HttpURLConnection) alarmUrl.openConnection();
-		}
+
+		return (HttpURLConnection) alarmUrl.openConnection();
 	}
-	
-	protected void onPostExecute(Integer httpResponseCode) {
+
+	/**
+     * {@inheritDoc}
+     */
+	@Override
+    protected void onPostExecute(Integer httpResponseCode) {
 		int alarmMessageResourceId;
 		if(AlarmType.ALARM_ACTIVATED.equals(alarmType)) {
 			if(isResponseOk(httpResponseCode)) {
@@ -93,7 +99,7 @@ public class ExternalPanicRequestTask extends AsyncTask<String, Integer, Integer
 				alarmMessageResourceId = R.string.externalAlarmOffFailedToast;
 			}
 		}
-		
+
 		Toast externalAlarmOnToast = Toast.makeText(context, context.getResources().getString(alarmMessageResourceId), Toast.LENGTH_SHORT);
 		externalAlarmOnToast.show();
     }

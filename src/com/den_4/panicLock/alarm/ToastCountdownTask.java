@@ -25,41 +25,47 @@ import android.widget.Toast;
 
 /**
  * Provides a countdown that provides one-second updates via {@link Toast}s that ends when the countdown hits 0.
- * 
+ *
  * @author tony (<a href="mailto:tony@den-4.com">tony@den-4.com</a>)
  */
 public class ToastCountdownTask extends AsyncTask<Integer, Integer, Integer> {
 	private Context context;
 	private Toast countdownToast;
-	
+
 	public ToastCountdownTask(Context context) {
 		this.context = context;
 	}
-	
+
 	/**
 	 * Create toast for each second in the countdown, except 0.
+	 * <br/>
+	 * <br/>
+	 * {@inheritDoc}
 	 */
 	@Override
 	protected Integer doInBackground(Integer... params) {
 		int countdownStart = params[0];
-		
+
 		while(countdownStart > 0) {
 			publishProgress(countdownStart);
 
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				
+
 				//thread interrupted, countdown cancelled.
 				countdownStart = 0;
 			}
-			
+
 			countdownStart--;
 		}
-		
+
 		return 0;
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void onProgressUpdate(Integer... values) {
 		if(countdownToast != null) {
@@ -68,10 +74,13 @@ public class ToastCountdownTask extends AsyncTask<Integer, Integer, Integer> {
 		else {
 			countdownToast = Toast.makeText(context, String.valueOf(values[0]), Toast.LENGTH_LONG);
 		}
-		
+
 		countdownToast.show();
 	}
 
+	/**
+     * {@inheritDoc}
+     */
 	@Override
 	protected void onPostExecute(Integer result) {
 		cancelCurrentCountdown();
@@ -79,14 +88,17 @@ public class ToastCountdownTask extends AsyncTask<Integer, Integer, Integer> {
 
 	/**
 	 * Kill the countdown toast if this task has been cancelled.
+	 * <br/>
+	 * <br/>
+	 * {@inheritDoc}
 	 */
 	@Override
 	protected void onCancelled() {
 		super.onCancelled();
-		
+
 		cancelCurrentCountdown();
 	}
-	
+
 	/**
 	 * Cancels the toast countdown if it exists.
 	 */

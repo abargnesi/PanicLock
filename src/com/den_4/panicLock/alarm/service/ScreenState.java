@@ -19,6 +19,11 @@
  */
 package com.den_4.panicLock.alarm.service;
 
+/**
+ * TODO comment
+ *
+ * @author tony (<a href="mailto:tony@den-4.com">tony@den-4.com</a>)
+ */
 public enum ScreenState {
     SCREEN_ON,
     SCREEN_OFF;

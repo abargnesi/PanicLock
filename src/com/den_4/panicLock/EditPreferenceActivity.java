@@ -30,7 +30,7 @@ import android.preference.PreferenceActivity;
 
 /**
  * Activity for editing preferences of the application.
- * 
+ *
  * @author tony (<a href="mailto:tony@den-4.com">tony@den-4.com</a>)
  */
 public class EditPreferenceActivity extends PreferenceActivity {
@@ -40,55 +40,61 @@ public class EditPreferenceActivity extends PreferenceActivity {
 	private CheckBoxPreference eaPref;
 	private EditTextPreference aonPref;
 	private EditTextPreference aoffPref;
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.prefs);
-		
+
 		OnPreferenceChangeListener preferenceChangeListener = new SummaryUpdater();
 		qpAlarmPref = (ListPreference) findPreference(getString(R.string.quickPanicAlarm));
 		qpAlarmPref.setOnPreferenceChangeListener(preferenceChangeListener);
-		
+
 		dmsAlarmPref = (ListPreference) findPreference(getString(R.string.deadMansSwitchAlarm));
 		dmsAlarmPref.setOnPreferenceChangeListener(preferenceChangeListener);
-		
+
 		pldAlarmPref = (ListPreference) findPreference(getString(R.string.panicLockDisturbanceAlarm));
 		pldAlarmPref.setOnPreferenceChangeListener(preferenceChangeListener);
-		
+
 		eaPref = (CheckBoxPreference) findPreference(getString(R.string.externalAlarm));
 		aonPref = (EditTextPreference) findPreference(getString(R.string.alarmOnUrl));
 		aoffPref = (EditTextPreference) findPreference(getString(R.string.alarmOffUrl));
 	}
-	
+
     /**
      * Upon being resumed we can retrieve the current state.  This allows us
      * to update the state if it was changed at any time while paused.
+     * <br/>
+     * <br/>
+     * {@inheritDoc}
      */
     @Override
     protected void onResume() {
         super.onResume();
 
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE); 
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 
         String quickPanicAlarm = prefs.getString(getString(R.string.quickPanicAlarm), getString(R.string.quickPanicAlarmDefaultValue));
         qpAlarmPref.setValue(quickPanicAlarm);
         qpAlarmPref.setSummary(quickPanicAlarm);
-        
+
         String deadMansSwitchAlarm = prefs.getString(getString(R.string.deadMansSwitchAlarm), getString(R.string.deadMansSwitchAlarmDefaultValue));
         dmsAlarmPref.setValue(deadMansSwitchAlarm);
         dmsAlarmPref.setSummary(deadMansSwitchAlarm);
-        
+
         String panicLockDisturbanceAlarm = prefs.getString(getString(R.string.panicLockDisturbanceAlarm), getString(R.string.panicLockDisturbanceAlarmDefaultValue));
         pldAlarmPref.setValue(panicLockDisturbanceAlarm);
         pldAlarmPref.setSummary(panicLockDisturbanceAlarm);
-        
+
         boolean externalAlarm = prefs.getBoolean(getString(R.string.externalAlarm), false);
         eaPref.setChecked(externalAlarm);
-        
+
         String alarmOnUrl = prefs.getString(getString(R.string.alarmOnUrl), "http://");
         aonPref.setText(alarmOnUrl);
-        
+
         String alarmOffUrl = prefs.getString(getString(R.string.alarmOffUrl), "http://");
         aoffPref.setText(alarmOffUrl);
     }
@@ -96,6 +102,9 @@ public class EditPreferenceActivity extends PreferenceActivity {
     /**
      * Any time we are paused we need to save away the current state, so it
      * will be restored correctly when we are resumed.
+     * <br/>
+     * <br/>
+     * {@inheritDoc}
      */
     @Override
     protected void onPause() {
@@ -103,36 +112,47 @@ public class EditPreferenceActivity extends PreferenceActivity {
         savePreferences();
     }
 
+    /**
+     * Any time we stop we need to save away the current state, so it
+     * will be restored correctly when we are resumed.
+     * <br/>
+     * <br/>
+     * {@inheritDoc}
+     */
 	@Override
 	protected void onStop() {
 		super.onStop();
 		savePreferences();
 	}
-	
+
 	private void savePreferences() {
 		SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
-		
+
 		editor.putString(getString(R.string.quickPanicAlarm), qpAlarmPref.getValue());
 		editor.putString(getString(R.string.deadMansSwitchAlarm), dmsAlarmPref.getValue());
 		editor.putString(getString(R.string.panicLockDisturbanceAlarm), pldAlarmPref.getValue());
-		
+
         editor.putBoolean(getString(R.string.externalAlarm), eaPref.isChecked());
         editor.putString(getString(R.string.alarmOnUrl), aonPref.getText());
         editor.putString(getString(R.string.alarmOffUrl), aoffPref.getText());
-        
+
         editor.commit();
 	}
-	
+
 	/**
 	 * Used to update the preference summary text with the latest value.
-	 * 
+	 *
 	 * @author tony (<a href="mailto:tony@den-4.com">tony@den-4.com</a>)
 	 */
 	private class SummaryUpdater implements OnPreferenceChangeListener {
 
-		public boolean onPreferenceChange(Preference preference, Object newValue) {
+	    /**
+	     * {@inheritDoc}
+	     */
+		@Override
+        public boolean onPreferenceChange(Preference preference, Object newValue) {
 			preference.setSummary(newValue.toString());
-			
+
 			return true;
 		}
 	}

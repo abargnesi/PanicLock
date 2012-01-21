@@ -43,56 +43,56 @@ import com.den_4.panicLock.util.PreferencesUtil;
 
 /**
  * Main application activity, showing the PANIC button, that allows the user to trigger the three types of alarms based on duration thresholds defined in {@link PanicThresholds}.
- * 
+ *
  * @author tony (<a href="mailto:tony@den-4.com">tony@den-4.com</a>)
  */
 public class PanicLockMainActivity extends Activity implements OnTouchListener {
 	private final static int MENU_PREFERENCES = 1;
 	private final static int MENU_EXIT = 2;
 	private Chronometer chronometer;
-	
-    /* (non-Javadoc)
-     * @see android.app.Activity#onCreate(android.os.Bundle)
-     */
+
+	/**
+	 * {@inheritDoc}
+	 */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);       
-        
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.main);
-        
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		boolean panicLock = prefs.getBoolean(getString(R.string.panicLock), false);
-		
+
 		if(panicLock) {
 			((ImageView) findViewById(R.id.panicButtonView)).setImageResource(R.drawable.panic_depressed);
 		}
-        
+
         ((ImageView) findViewById(R.id.panicButtonView)).setOnTouchListener(this);
     }
 
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
-	 */
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		
+
 		MenuItem preferencesMenuItem = menu.add(0, MENU_PREFERENCES, 0, R.string.menu_preferences);
 		preferencesMenuItem.setIcon(R.drawable.preferences_icon);
-		
+
 		MenuItem exitMenuItem = menu.add(0, MENU_EXIT, 1, R.string.menu_exit);
 		exitMenuItem.setIcon(R.drawable.exit_icon);
-		
+
 		return true;
 	}
 
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
-	 */
+	/**
+     * {@inheritDoc}
+     */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -103,11 +103,15 @@ public class PanicLockMainActivity extends Activity implements OnTouchListener {
 			finish();
 			return true;
 		}
-		
+
 		return (super.onOptionsItemSelected(item));
 	}
-	
-	public boolean onTouch(View v, MotionEvent event) {
+
+	/**
+     * {@inheritDoc}
+     */
+	@Override
+    public boolean onTouch(View v, MotionEvent event) {
 		if(event.getAction() == MotionEvent.ACTION_DOWN) {
 			((ImageView) v).setImageResource(R.drawable.panic_depressed);
 			chronometer = new Chronometer(this);
@@ -117,12 +121,12 @@ public class PanicLockMainActivity extends Activity implements OnTouchListener {
 			chronometer.stop();
 			AlarmStrategyFactory.processAlarmAction(SystemClock.elapsedRealtime() - chronometer.getBase(), this);
 		}
-		
+
 		return true;
 	}
 
-    /* (non-Javadoc)
-     * @see android.app.Activity#onPause()
+	/**
+     * {@inheritDoc}
      */
     @Override
     protected void onPause() {
@@ -135,7 +139,7 @@ public class PanicLockMainActivity extends Activity implements OnTouchListener {
      */
     protected void cleanupMainActivity() {
         getApplicationContext().stopService(new Intent(getApplicationContext(), PanicLockService.class));
-        
+
         //Disable panic lock preference and reset panic button resource.
         PreferencesUtil.disabledPanicLock(getApplicationContext());
         ((ImageView) findViewById(R.id.panicButtonView)).setImageResource(R.drawable.panic_default);

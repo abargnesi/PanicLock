@@ -28,28 +28,28 @@ import android.widget.RemoteViews;
 
 /**
  * {@link AppWidgetProvider} used to set up the "Quick Panic!" widget view.
- * 
+ *
  * @author tony (<a href="mailto:tony@den-4.com">tony@den-4.com</a>)
  */
 public class PanicWidget extends AppWidgetProvider {
 
-	/* (non-Javadoc)
-	 * @see android.appwidget.AppWidgetProvider#onUpdate(android.content.Context, android.appwidget.AppWidgetManager, int[])
-	 */
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int i=0; i < appWidgetIds.length; i++) {
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
-            
+
             //Wire the "Panic" button to toggle the Quick Panic alarm.
             views.setOnClickPendingIntent(R.id.panicButton, PendingIntent.getBroadcast(context, 0, new Intent("com.den_4.panicLock.ALARM_TRIGGER"), PendingIntent.FLAG_UPDATE_CURRENT));
-            
+
             //Wire the configure button to launch widget preferences.
             views.setOnClickPendingIntent(R.id.configureButton, PendingIntent.getActivity(context, 0, new Intent(context, PanicWidgetAlarmPreference.class), PendingIntent.FLAG_UPDATE_CURRENT));
-            
+
             //Wire the launcher button to launch the main "PanicLock" application activity.
             views.setOnClickPendingIntent(R.id.mainAppLauncherButton, PendingIntent.getActivity(context, 0, new Intent(context, PanicLockMainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT));
-            
+
             appWidgetManager.updateAppWidget(appWidgetIds[i], views);
         }
 	}

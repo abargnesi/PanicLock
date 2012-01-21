@@ -27,42 +27,42 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 
 /**
- * 
- * 
+ * TODO comment
+ *
  * @author tony (<a href="mailto:tony@den-4.com">tony@den-4.com</a>)
  */
 public class PanicWidgetAlarmPreference extends PreferenceActivity {
     private ListPreference qpAlarmPref;
-    
-    /* (non-Javadoc)
-     * @see android.preference.PreferenceActivity#onCreate(android.os.Bundle)
+
+    /**
+     * {@inheritDoc}
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.widget_prefs);
-        
+
         OnPreferenceChangeListener preferenceChangeListener = new SummaryUpdater();
         qpAlarmPref = (ListPreference) findPreference(getString(R.string.quickPanicAlarm));
         qpAlarmPref.setOnPreferenceChangeListener(preferenceChangeListener);
     }
-    
-    /* (non-Javadoc)
-     * @see android.app.Activity#onResume()
+
+    /**
+     * {@inheritDoc}
      */
     @Override
     protected void onResume() {
         super.onResume();
 
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE); 
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 
         String quickPanicAlarm = prefs.getString(getString(R.string.quickPanicAlarm), getString(R.string.quickPanicAlarmDefaultValue));
         qpAlarmPref.setValue(quickPanicAlarm);
         qpAlarmPref.setSummary(quickPanicAlarm);
     }
 
-    /* (non-Javadoc)
-     * @see android.app.Activity#onPause()
+    /**
+     * {@inheritDoc}
      */
     @Override
     protected void onPause() {
@@ -70,34 +70,35 @@ public class PanicWidgetAlarmPreference extends PreferenceActivity {
         savePreferences();
     }
 
-    /* (non-Javadoc)
-     * @see android.preference.PreferenceActivity#onStop()
+    /**
+     * {@inheritDoc}
      */
     @Override
     protected void onStop() {
         super.onStop();
         savePreferences();
     }
-    
+
     private void savePreferences() {
         SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
         editor.putString(getString(R.string.quickPanicAlarm), qpAlarmPref.getValue());
         editor.commit();
     }
-    
+
     /**
      * Used to update the preference summary text with the latest value.
-     * 
+     *
      * @author tony (<a href="mailto:tony@den-4.com">tony@den-4.com</a>)
      */
     private class SummaryUpdater implements OnPreferenceChangeListener {
 
-        /* (non-Javadoc)
-         * @see android.preference.Preference.OnPreferenceChangeListener#onPreferenceChange(android.preference.Preference, java.lang.Object)
+        /**
+         * {@inheritDoc}
          */
+        @Override
         public boolean onPreferenceChange(Preference preference, Object newValue) {
             preference.setSummary(newValue.toString());
-            
+
             return true;
         }
     }

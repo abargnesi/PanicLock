@@ -29,13 +29,13 @@ import com.den_4.panicLock.util.PreferencesUtil;
 /**
  * {@link BroadcastReceiver} triggered by {@link PanicWidget} when the "Quick Panic!" button is pressed.  The implementation of this receiver
  * acts as a toggle to turn the quick panic alarm on and off.
- * 
+ *
  * @author tony (<a href="mailto:tony@den-4.com">tony@den-4.com</a>)
  */
 public class AlarmTriggerReceiver extends BroadcastReceiver {
 
-    /* (non-Javadoc)
-     * @see android.content.BroadcastReceiver#onReceive(android.content.Context, android.content.Intent)
+    /**
+     * {@inheritDoc}
      */
     @Override
     public void onReceive(Context context, Intent intent) {
